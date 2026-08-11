@@ -6,12 +6,14 @@ import {
   resetToInitialRegistrations 
 } from '../utils/storage';
 import { exportRegistrationsToExcel } from '../utils/excelExport';
+import { syncAllRecordsToGoogleSheet } from '../utils/sheetSync';
 import { RegistrationRecord, ApplicationStatus, SchoolLevel } from '../types';
 import { CLASSES_DATA } from '../data/classesData';
 import { 
   Download, Search, Filter, ShieldCheck, Lock, Unlock, Users, 
   AlertTriangle, CheckCircle2, RefreshCw, Eye, Trash2, X, FileSpreadsheet,
-  BarChart2, PieChart, CheckSquare, Sparkles, Building2, ChevronRight
+  BarChart2, PieChart, CheckSquare, Sparkles, Building2, ChevronRight,
+  Send, Loader2, ExternalLink
 } from 'lucide-react';
 
 export const AdminDashboard: React.FC = () => {
@@ -21,7 +23,6 @@ export const AdminDashboard: React.FC = () => {
     if (isLoggedOut) return false;
     const isAuth = sessionStorage.getItem('fpt_admin_auth');
     if (isAuth === 'true') return true;
-    // Default on initial load: require login if previously logged out or fresh session
     return false;
   });
   const [pin, setPin] = useState('');
@@ -31,6 +32,10 @@ export const AdminDashboard: React.FC = () => {
   const [records, setRecords] = useState<RegistrationRecord[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   
+  // Syncing state
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncNotice, setSyncNotice] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
   // Filters
   const [filterClassId, setFilterClassId] = useState<string>('all');
   const [filterSchoolLevel, setFilterSchoolLevel] = useState<string>('all');
@@ -52,6 +57,27 @@ export const AdminDashboard: React.FC = () => {
   useEffect(() => {
     loadRecords();
   }, []);
+
+  const handleSyncAllToSheets = async () => {
+    setIsSyncing(true);
+    setSyncNotice(null);
+
+    const result = await syncAllRecordsToGoogleSheet(filteredRecords.length > 0 ? filteredRecords : records);
+
+    setIsSyncing(false);
+    if (result.success) {
+      setSyncNotice({
+        type: 'success',
+        message: result.message || 'Đã đồng bộ thành công dữ liệu vào Google Sheet!'
+      });
+    } else {
+      setSyncNotice({
+        type: 'error',
+        message: result.message || 'Lỗi đồng bộ Google Sheets'
+      });
+    }
+  };
+
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -197,6 +223,21 @@ export const AdminDashboard: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
+          {/* Auto-sync to Google Sheets Button */}
+          <button
+            onClick={handleSyncAllToSheets}
+            disabled={isSyncing}
+            className="px-4 py-3 rounded-2xl bg-[#F26522] hover:bg-[#d85412] text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            title="Đồng bộ tất cả dữ liệu đơn hiện tại lên Google Sheets"
+          >
+            {isSyncing ? (
+              <Loader2 className="w-5 h-5 text-amber-200 animate-spin" />
+            ) : (
+              <Send className="w-5 h-5 text-amber-300" />
+            )}
+            <span>{isSyncing ? 'Đang đồng bộ...' : 'Tự động đồng bộ Google Sheets'}</span>
+          </button>
+
           {/* Direct Google Sheets Link Button */}
           <a
             href="https://docs.google.com/spreadsheets/d/1-gEeQfiw830niRJ0chGufp497sW6n0VY917OeKQD_zM/edit?usp=sharing"
@@ -205,13 +246,13 @@ export const AdminDashboard: React.FC = () => {
             className="px-4 py-3 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
           >
             <FileSpreadsheet className="w-5 h-5 text-emerald-300" />
-            <span>Mở Google Sheet</span>
+            <span>Mở Sheet</span>
           </a>
 
           {/* Main Excel Export Button */}
           <button
             onClick={handleExportExcel}
-            className="px-4 py-3 rounded-2xl bg-blue-700 hover:bg-blue-800 text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
+            className="px-4 py-3 rounded-2xl bg-[#002D62] hover:bg-[#001d42] text-white font-extrabold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer"
           >
             <Download className="w-5 h-5 text-blue-200" />
             <span>Tải Excel (.xlsx)</span>
@@ -219,7 +260,7 @@ export const AdminDashboard: React.FC = () => {
 
           <button
             onClick={() => setShowResetConfirm(true)}
-            className="p-3 rounded-2xl border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors"
+            className="p-3 rounded-2xl border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
             title="Khôi phục dữ liệu mẫu"
           >
             <RefreshCw className="w-4 h-4" />
@@ -235,6 +276,37 @@ export const AdminDashboard: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Sync Status Feedback Alert Banner */}
+      {syncNotice && (
+        <div className={`p-4 rounded-2xl border text-xs font-semibold flex items-center justify-between gap-3 shadow-2xs ${
+          syncNotice.type === 'success'
+            ? 'bg-emerald-50 border-emerald-300 text-emerald-900'
+            : 'bg-rose-50 border-rose-300 text-rose-900'
+        }`}>
+          <div className="flex items-center gap-2.5">
+            {syncNotice.type === 'success' ? (
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            ) : (
+              <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
+            )}
+            <div>
+              <span className="font-bold block text-sm">
+                {syncNotice.type === 'success' ? 'Kết quả đồng bộ thành công:' : 'Cảnh báo đồng bộ:'}
+              </span>
+              <p className="font-medium text-xs mt-0.5 leading-relaxed">{syncNotice.message}</p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setSyncNotice(null)}
+            className="p-1.5 rounded-lg hover:bg-black/10 text-slate-500 cursor-pointer shrink-0"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
 
       {/* KPI Stats Analytics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

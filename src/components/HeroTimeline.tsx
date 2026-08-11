@@ -11,33 +11,33 @@ export const HeroTimeline: React.FC<HeroTimelineProps> = ({ onStartRegister, onE
   return (
     <div className="space-y-12 pb-8">
       {/* Hero Banner Section */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#002D62] via-[#00428B] to-[#0f172a] text-white p-8 sm:p-12 lg:p-16 shadow-xl border border-blue-900/40">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#002D62] via-[#00428B] to-[#0f172a] text-white p-5 sm:p-10 lg:p-16 shadow-xl border border-blue-900/40">
         {/* Background glow effects */}
         <div className="absolute top-0 right-0 -mt-12 -mr-12 w-96 h-96 bg-[#F26522]/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 -mb-12 -ml-12 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 grid lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-semibold">
-              <Zap className="w-4 h-4 text-[#F26522]" />
-              <span>KẾ HOẠCH BỒI DƯỠNG NĂNG KHIẾU TỔ STEM (NĂM HỌC 2026 – 2027)</span>
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-left">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-amber-300 text-[11px] sm:text-xs font-semibold leading-snug">
+              <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F26522] shrink-0" />
+              <span>KẾ HOẠCH BỒI DƯỠNG NĂNG KHIẾU TỔ STEM (2026 – 2027)</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
-              Đánh Thức Tiềm Năng <br />
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+              Đánh Thức Tiềm Năng <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F26522] via-orange-300 to-amber-200">
                 Công Nghệ & Robot
               </span>
             </h1>
 
-            <p className="text-slate-200 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+            <p className="text-slate-200 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl font-normal">
               Chương trình bồi dưỡng chuyên sâu do <strong className="text-white font-semibold">Tổ STEM Trường TH, THCS & THPT FPT Bắc Giang</strong> tổ chức. Giúp học sinh làm chủ Lập trình C++/Scratch, thi đấu Robocon sa bàn, chinh phục Robot chuẩn Quốc tế VEX & FIRST Tech Challenge, cùng công nghệ Drone hiện đại.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
               <button
                 onClick={onStartRegister}
-                className="px-6 py-3.5 rounded-2xl bg-[#F26522] hover:bg-[#d85412] text-white font-bold text-base shadow-lg shadow-[#F26522]/30 hover:shadow-xl transition-all flex items-center gap-2 group cursor-pointer"
+                className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl bg-[#F26522] hover:bg-[#d85412] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#F26522]/30 hover:shadow-xl transition-all flex items-center gap-2 group cursor-pointer"
               >
                 <span>Đăng ký tham gia ngay</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -45,14 +45,14 @@ export const HeroTimeline: React.FC<HeroTimelineProps> = ({ onStartRegister, onE
 
               <button
                 onClick={onExploreClasses}
-                className="px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-base border border-white/20 transition-all cursor-pointer backdrop-blur-sm"
+                className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm sm:text-base border border-white/20 transition-all cursor-pointer backdrop-blur-sm"
               >
                 Xem chi tiết 13 Lớp học
               </button>
             </div>
 
             {/* Quick feature highlights */}
-            <div className="pt-6 border-t border-white/10 grid grid-cols-3 gap-4 text-xs font-medium text-slate-300">
+            <div className="pt-5 border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-4 text-xs font-medium text-slate-300">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>100% Miễn học phí</span>
@@ -69,7 +69,7 @@ export const HeroTimeline: React.FC<HeroTimelineProps> = ({ onStartRegister, onE
           </div>
 
           {/* Right Visual Bento Box */}
-          <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 space-y-2">
               <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center text-[#F26522]">
                 <Code2 className="w-5 h-5" />

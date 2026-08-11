@@ -36,14 +36,26 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   const [selectedClassId, setSelectedClassId] = useState<string>(preselectedClass ? preselectedClass.id : '');
 
   // Commitments State
-  const [registrationPurpose, setRegistrationPurpose] = useState<RegistrationPurpose>(
-    'Mong muốn của PH & HS được tham gia học tập và rèn luyện'
-  );
+  const [purposeStudentWant, setPurposeStudentWant] = useState<boolean>(true);
+  const [purposeParentWant, setPurposeParentWant] = useState<boolean>(true);
   const [timeCommitment, setTimeCommitment] = useState<boolean>(false);
   const [equipmentCommitment, setEquipmentCommitment] = useState<boolean>(false);
   const [competitionNational, setCompetitionNational] = useState<boolean>(true);
   const [competitionInternational, setCompetitionInternational] = useState<boolean>(false);
   const [notes, setNotes] = useState('');
+
+  const getComputedRegistrationPurpose = (): RegistrationPurpose => {
+    if (purposeStudentWant && purposeParentWant) {
+      return 'Mong muốn của PH & HS được tham gia học tập và rèn luyện';
+    }
+    if (purposeStudentWant) {
+      return 'Mong muốn của HS được tham gia học tập và rèn luyện';
+    }
+    if (purposeParentWant) {
+      return 'Mong muốn của PH để HS được tham gia học tập và rèn luyện';
+    }
+    return 'Mong muốn của PH & HS được tham gia học tập và rèn luyện';
+  };
 
   // Validation Errors
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -108,10 +120,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   // Step 3 Validation (Commitments)
   const validateStep3 = () => {
     const errs: { [key: string]: string } = {};
-    if (!registrationPurpose) errs.registrationPurpose = 'Vui lòng chọn mục đích đăng ký';
+    if (!purposeStudentWant && !purposeParentWant) {
+      errs.registrationPurpose = 'Vui lòng chọn ít nhất 1 mục đích đăng ký (Học sinh hoặc Phụ huynh)';
+    }
     if (!timeCommitment) errs.timeCommitment = 'Bạn cần tích đồng ý cam kết thời gian & chủ động đưa đón';
-    if (!equipmentCommitment) errs.equipmentCommitment = 'Bạn cần tích sẵn sàng đầu tư vật tư Robot/Drone khi trúng tuyển';
-    if (!competitionNational && !competitionInternational) {
+    if (currentSelectedClassObj?.hasEquipmentFee && !equipmentCommitment) {
+      errs.equipmentCommitment = 'Bạn cần tích sẵn sàng đầu tư vật tư Robot/Drone khi trúng tuyển';
+    }
+    if (!currentSelectedClassObj?.isExamRequired && !competitionNational && !competitionInternational) {
       errs.competition = 'Bạn cần chọn ít nhất 1 phạm vi thi đấu (Quốc gia hoặc Quốc tế)';
     }
 
@@ -174,7 +190,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       zaloPhone,
       email,
       selectedClassId,
-      registrationPurpose,
+      registrationPurpose: getComputedRegistrationPurpose(),
       timeCommitment,
       equipmentCommitment,
       competitionNational,
@@ -288,7 +304,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             2. Chọn Lớp CLB
           </span>
           <span className={step === 3 ? 'text-[#F26522] font-bold' : 'text-slate-500'}>
-            3. Cam kết Phụ huynh
+            3. Định hướng đồng hành
           </span>
         </div>
       </div>
@@ -743,25 +759,25 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             <button
               type="button"
               onClick={handleNextStep2}
-              className="px-6 py-3 rounded-xl bg-[#F26522] hover:bg-[#d85412] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2"
+              className="px-6 py-3 rounded-xl bg-[#F26522] hover:bg-[#d85412] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
             >
-              <span>Tiếp tục: XÁC NHẬN CAM KẾT</span>
+              <span>Tiếp tục: Xem định hướng</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
         </div>
       )}
 
-      {/* STEP 3: Mandatory Parental Commitments */}
+      {/* STEP 3: Mandatory Parental Commitments & Orientation */}
       {step === 3 && (
         <form onSubmit={handleSubmitFinal} className="bg-white p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-sm space-y-8">
           <div>
             <h2 className="text-xl font-bold text-[#002D62] flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-[#F26522]" />
-              <span>Bước 3: Điều Khoản & Xác Nhận Cam Kết Từ Phụ Huynh</span>
+              <span>Bước 3: Chi tiết định hướng phía nhà trường</span>
             </h2>
             <p className="text-xs text-slate-500 mt-1">
-              Phụ huynh vui lòng đọc kỹ và xác nhận đầy đủ các mục cam kết theo đúng quy chế Tổ STEM FPT Bắc Giang.
+              Phụ huynh vui lòng đọc kỹ và xác nhận các nội dung định hướng đồng hành cùng Tổ STEM FPT Bắc Giang.
             </p>
           </div>
 
@@ -800,23 +816,30 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             <label className="block text-xs font-bold text-slate-900 uppercase tracking-wide">
               1. Mục đích đăng ký (*)
             </label>
-            <div className="space-y-2 text-xs">
-              {[
-                'Mong muốn của HS được tham gia học tập và rèn luyện',
-                'Mong muốn của PH để HS được tham gia học tập và rèn luyện',
-                'Mong muốn của PH & HS được tham gia học tập và rèn luyện'
-              ].map((opt) => (
-                <label key={opt} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-200 hover:border-[#F26522] cursor-pointer">
-                  <input
-                    type="radio"
-                    name="purpose"
-                    checked={registrationPurpose === opt}
-                    onChange={() => setRegistrationPurpose(opt as RegistrationPurpose)}
-                    className="w-4 h-4 text-[#F26522] focus:ring-[#F26522]"
-                  />
-                  <span className="font-medium text-slate-800">{opt}</span>
-                </label>
-              ))}
+            <div className="grid sm:grid-cols-2 gap-3 text-xs">
+              <label className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all ${
+                purposeStudentWant ? 'bg-orange-50/50 border-[#F26522] font-bold' : 'bg-white border-slate-200'
+              }`}>
+                <input
+                  type="checkbox"
+                  checked={purposeStudentWant}
+                  onChange={(e) => setPurposeStudentWant(e.target.checked)}
+                  className="w-4 h-4 text-[#F26522] rounded focus:ring-[#F26522]"
+                />
+                <span className="text-slate-800">Học sinh muốn tham gia</span>
+              </label>
+
+              <label className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer transition-all ${
+                purposeParentWant ? 'bg-orange-50/50 border-[#F26522] font-bold' : 'bg-white border-slate-200'
+              }`}>
+                <input
+                  type="checkbox"
+                  checked={purposeParentWant}
+                  onChange={(e) => setPurposeParentWant(e.target.checked)}
+                  className="w-4 h-4 text-[#F26522] rounded focus:ring-[#F26522]"
+                />
+                <span className="text-slate-800">Phụ huynh muốn con tham gia</span>
+              </label>
             </div>
             {errors.registrationPurpose && <p className="text-xs text-rose-500 font-bold">{errors.registrationPurpose}</p>}
           </div>
@@ -847,78 +870,82 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             {errors.timeCommitment && <p className="text-xs text-rose-500 font-bold">{errors.timeCommitment}</p>}
           </div>
 
-          {/* Commitment 3: Equipment Investment (8 - 10 Million) */}
-          <div className="p-5 rounded-2xl bg-amber-50/60 border border-amber-200 space-y-3">
-            <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-amber-900 uppercase tracking-wide">
-                3. Đầu tư vật tư học tập (*)
-              </label>
-              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-amber-200 text-amber-900">
-                Lớp Robot / Drone
-              </span>
-            </div>
-
-            <p className="text-xs text-slate-600 leading-relaxed bg-white p-3 rounded-xl border border-amber-200">
-              📌 <strong>Ghi chú từ Nhà trường:</strong> Nhà trường đào tạo học tập miễn phí 100%. Tuy nhiên, Phụ huynh học sinh sẽ cần đầu tư vật tư chuyên dụng đối với các mô hình lớp Robot & Drone. Đây là vật tư tiêu hao theo mô hình Robot đáp ứng giải pháp của Học sinh để tham gia các cuộc thi. <em>(Lưu ý: Các lớp Lập trình Scratch/C++ sẽ không có khoản vật tư này, tuy nhiên PH vẫn tích để đồng ý bước tiếp).</em>
-            </p>
-
-            <label className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
-              equipmentCommitment ? 'bg-orange-50/70 border-[#F26522] font-semibold' : 'bg-white border-amber-200'
-            }`}>
-              <input
-                type="checkbox"
-                checked={equipmentCommitment}
-                onChange={(e) => setEquipmentCommitment(e.target.checked)}
-                className="w-5 h-5 text-[#F26522] rounded focus:ring-[#F26522] mt-0.5"
-              />
-              <div className="text-xs text-slate-900">
-                <span className="font-bold text-[#002D62] block">
-                  Sẵn sàng đầu tư vật tư Robot/Drone cho HS tham gia các cuộc thi (8 - 10 triệu/HS)
-                </span>
-                <span className="text-slate-600 text-[11px] block mt-0.5">
-                  Xác nhận chuẩn bị sẵn kinh phí vật tư khi học sinh trúng tuyển vào đội tuyển chính thức.
+          {/* Commitment 3: Equipment Investment (Only shown for classes with equipment fee e.g. Robot/Drone) */}
+          {currentSelectedClassObj?.hasEquipmentFee && (
+            <div className="p-5 rounded-2xl bg-amber-50/60 border border-amber-200 space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-bold text-amber-900 uppercase tracking-wide">
+                  3. Đầu tư vật tư học tập (*)
+                </label>
+                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-md bg-amber-200 text-amber-900">
+                  Lớp Robot / Drone
                 </span>
               </div>
-            </label>
-            {errors.equipmentCommitment && <p className="text-xs text-rose-500 font-bold">{errors.equipmentCommitment}</p>}
-          </div>
 
-          {/* Commitment 4: Competition Scale */}
-          <div className="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-3">
-            <label className="block text-xs font-bold text-slate-900 uppercase tracking-wide">
-              4. Đầu tư kinh phí thi đấu (*)
-            </label>
-            <p className="text-xs text-slate-500">
-              Thông thường các cuộc thi sẽ có các chi phí gồm: lệ phí tham gia, lệ phí thành lập đội thi (VEX/FTC - Hệ thống Quốc tế), chi phí di chuyển, ăn ở khách sạn, vé máy bay, hộ chiếu, visa...
-            </p>
+              <p className="text-xs text-slate-600 leading-relaxed bg-white p-3 rounded-xl border border-amber-200">
+                📌 <strong>Ghi chú từ Nhà trường:</strong> Nhà trường đào tạo học tập miễn phí 100%. Tuy nhiên, Phụ huynh học sinh sẽ cần đầu tư vật tư chuyên dụng đối với các mô hình lớp Robot & Drone. Đây là vật tư tiêu hao theo mô hình Robot đáp ứng giải pháp của Học sinh để tham gia các cuộc thi.
+              </p>
 
-            <div className="grid sm:grid-cols-2 gap-3 text-xs">
-              <label className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer ${
-                competitionNational ? 'bg-orange-50/50 border-[#F26522] font-bold' : 'bg-white border-slate-200'
+              <label className={`flex items-start gap-3 p-4 rounded-xl border transition-all cursor-pointer ${
+                equipmentCommitment ? 'bg-orange-50/70 border-[#F26522] font-semibold' : 'bg-white border-amber-200'
               }`}>
                 <input
                   type="checkbox"
-                  checked={competitionNational}
-                  onChange={(e) => setCompetitionNational(e.target.checked)}
-                  className="w-4 h-4 text-[#F26522] rounded focus:ring-[#F26522]"
+                  checked={equipmentCommitment}
+                  onChange={(e) => setEquipmentCommitment(e.target.checked)}
+                  className="w-5 h-5 text-[#F26522] rounded focus:ring-[#F26522] mt-0.5"
                 />
-                <span className="text-slate-800">Sẵn sàng tham gia Cuộc thi Cấp Quốc gia</span>
+                <div className="text-xs text-slate-900">
+                  <span className="font-bold text-[#002D62] block">
+                    Sẵn sàng đầu tư vật tư Robot/Drone cho HS tham gia các cuộc thi (8 - 10 triệu/HS)
+                  </span>
+                  <span className="text-slate-600 text-[11px] block mt-0.5">
+                    Xác nhận chuẩn bị sẵn kinh phí vật tư khi học sinh trúng tuyển vào đội tuyển chính thức.
+                  </span>
+                </div>
               </label>
-
-              <label className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer ${
-                competitionInternational ? 'bg-orange-50/50 border-[#F26522] font-bold' : 'bg-white border-slate-200'
-              }`}>
-                <input
-                  type="checkbox"
-                  checked={competitionInternational}
-                  onChange={(e) => setCompetitionInternational(e.target.checked)}
-                  className="w-4 h-4 text-[#F26522] rounded focus:ring-[#F26522]"
-                />
-                <span className="text-slate-800">Sẵn sàng tham gia Cuộc thi Cấp Quốc tế (VEX/FTC Mỹ)</span>
-              </label>
+              {errors.equipmentCommitment && <p className="text-xs text-rose-500 font-bold">{errors.equipmentCommitment}</p>}
             </div>
-            {errors.competition && <p className="text-xs text-rose-500 font-bold">{errors.competition}</p>}
-          </div>
+          )}
+
+          {/* Commitment 4: Competition Scale (Only shown for non-exam classes if any) */}
+          {!currentSelectedClassObj?.isExamRequired && (
+            <div className="p-5 rounded-2xl bg-slate-50/80 border border-slate-200 space-y-3">
+              <label className="block text-xs font-bold text-slate-900 uppercase tracking-wide">
+                {currentSelectedClassObj?.hasEquipmentFee ? '4.' : '3.'} Định hướng kinh phí thi đấu (*)
+              </label>
+              <p className="text-xs text-slate-500">
+                Thông thường các cuộc thi sẽ có các chi phí gồm: lệ phí tham gia, lệ phí thành lập đội thi (VEX/FTC - Hệ thống Quốc tế), chi phí di chuyển, ăn ở khách sạn, vé máy bay, hộ chiếu, visa...
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                <label className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer ${
+                  competitionNational ? 'bg-orange-50/50 border-[#F26522] font-bold' : 'bg-white border-slate-200'
+                }`}>
+                  <input
+                    type="checkbox"
+                    checked={competitionNational}
+                    onChange={(e) => setCompetitionNational(e.target.checked)}
+                    className="w-4 h-4 text-[#F26522] rounded focus:ring-[#F26522]"
+                  />
+                  <span className="text-slate-800">Sẵn sàng tham gia Cuộc thi Cấp Quốc gia</span>
+                </label>
+
+                <label className={`flex items-center gap-3 p-3.5 rounded-xl border cursor-pointer ${
+                  competitionInternational ? 'bg-orange-50/50 border-[#F26522] font-bold' : 'bg-white border-slate-200'
+                }`}>
+                  <input
+                    type="checkbox"
+                    checked={competitionInternational}
+                    onChange={(e) => setCompetitionInternational(e.target.checked)}
+                    className="w-4 h-4 text-[#F26522] rounded focus:ring-[#F26522]"
+                  />
+                  <span className="text-slate-800">Sẵn sàng tham gia Cuộc thi Cấp Quốc tế (VEX/FTC Mỹ)</span>
+                </label>
+              </div>
+              {errors.competition && <p className="text-xs text-rose-500 font-bold">{errors.competition}</p>}
+            </div>
+          )}
 
           {/* Notes Optional */}
           <div>

@@ -55,7 +55,7 @@ export default function App() {
         <Header activeTab={activeTab} setActiveTab={setActiveTab} totalCount={totalRecords} />
 
         {/* Main Body Content Container */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8">
           {/* TAB 1: HOME & TIMELINE */}
           {activeTab === 'home' && (
             <div className="space-y-12">

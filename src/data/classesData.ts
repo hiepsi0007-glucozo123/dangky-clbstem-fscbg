@@ -184,7 +184,7 @@ export const CLASSES_DATA: StemClass[] = [
     icon: 'Zap',
     scheduleHint: 'Thông báo sau khi thi tuyển',
     highlights: ['Điều khiển Drone lập trình Scratch/Blockly', 'Vượt chướng ngại vật sa bàn không gian', 'An toàn không lưu & Khí động học'],
-    docUrl: 'https://docs.google.com/document/d/1WdraKwdeU4C3Hs2ah2b6b8aKLomxW9-e/'
+    docUrl: 'https://docs.google.com/document/d/1natBgdjwJWW613ao4MpbT0VwU-W9f-2q/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
   
    {
@@ -265,7 +265,7 @@ export const CLASSES_DATA: StemClass[] = [
     icon: 'Zap',
     scheduleHint: 'Thông báo sau khi thi tuyển',
     highlights: ['Lập trình điều khiển drone nâng cao, xử lý đa nhiệm vụ', 'Kỹ năng đo đạc địa điểm, viết & chỉnh sửa code thực chiến', 'Luyện tập thi đấu cá nhân, chuẩn bị vòng quốc gia/quốc tế'],
-    docUrl: 'https://docs.google.com/document/d/1WdraKwdeU4C3Hs2ah2b6b8aKLomxW9-e/'
+    docUrl: 'https://docs.google.com/document/d/1natBgdjwJWW613ao4MpbT0VwU-W9f-2q/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true/'
   },
 ];
 

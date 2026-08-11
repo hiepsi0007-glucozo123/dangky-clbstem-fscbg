@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes badge-glow-amber {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4), 0 0 16px rgba(217, 119, 6, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(245, 158, 11, 0.75), 0 0 24px rgba(217, 119, 6, 0.4);
+  }
+}
+
+@keyframes badge-glow-emerald {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.35), 0 0 16px rgba(5, 150, 105, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.75), 0 0 24px rgba(5, 150, 105, 0.35);
+  }
+}
+
+.animate-badge-amber {
+  animation: gentle-pulse 2.2s infinite ease-in-out, badge-glow-amber 2.2s infinite ease-in-out;
+}
+
+.animate-badge-emerald {
+  animation: gentle-pulse 2.5s infinite ease-in-out, badge-glow-emerald 2.5s infinite ease-in-out;
+}

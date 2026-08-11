@@ -550,9 +550,21 @@ export const AdminDashboard: React.FC = () => {
 
                       <td className="py-3.5 px-4">
                         <span className="font-bold text-slate-900 block">{clsObj?.name || r.selectedClassId}</span>
-                        <span className="text-[10px] bg-blue-50 text-[#002D62] px-1.5 py-0.5 rounded font-bold">
-                          {clsObj?.code} • {clsObj?.categoryGroup}
-                        </span>
+                        <div className="flex flex-col gap-0.5 mt-0.5">
+                          <span className="text-[10px] bg-blue-50 text-[#002D62] px-1.5 py-0.5 rounded font-bold self-start">
+                            {clsObj?.code} • {clsObj?.categoryGroup}
+                          </span>
+                          {clsObj?.teacher && (
+                            <span className="text-[10px] text-slate-600">
+                              GV: <strong className="text-[#002D62]">{clsObj.teacher}</strong>
+                            </span>
+                          )}
+                          {clsObj?.scheduleHint && (
+                            <span className="text-[10px] text-slate-600">
+                              Lịch: <strong className="text-[#F26522]">{clsObj.scheduleHint}</strong>
+                            </span>
+                          )}
+                        </div>
                       </td>
 
                       <td className="py-3.5 px-4">
@@ -698,6 +710,12 @@ export const AdminDashboard: React.FC = () => {
                 <div>• Ngày sinh: {selectedRecord.dob}</div>
                 <div>• Lớp / Khối: <strong>{selectedRecord.className ? `Lớp ${selectedRecord.className}` : ''} (Khối {selectedRecord.currentGrade} - {selectedRecord.schoolLevel})</strong></div>
                 <div>• Lớp đăng ký: <strong className="text-[#002D62]">{classMap.get(selectedRecord.selectedClassId)?.name}</strong></div>
+                {classMap.get(selectedRecord.selectedClassId)?.teacher && (
+                  <div>• Giáo viên phụ trách: <strong className="text-[#002D62]">{classMap.get(selectedRecord.selectedClassId)?.teacher}</strong></div>
+                )}
+                {classMap.get(selectedRecord.selectedClassId)?.scheduleHint && (
+                  <div>• Lịch học dự kiến: <strong className="text-[#F26522]">{classMap.get(selectedRecord.selectedClassId)?.scheduleHint}</strong></div>
+                )}
               </div>
 
               <div className="space-y-2 p-4 rounded-2xl bg-slate-50 border border-slate-200">

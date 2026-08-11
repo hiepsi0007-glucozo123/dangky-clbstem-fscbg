@@ -26,6 +26,8 @@ export const exportRegistrationsToExcel = (records: RegistrationRecord[], fileNa
         'Email liên hệ': r.email || '',
         'Lớp CLB đăng ký': classInfo ? classInfo.name : (r.selectedClassId || ''),
         'Mã lớp': classInfo ? classInfo.code : '',
+        'Giáo viên phụ trách': classInfo?.teacher || '',
+        'Lịch học dự kiến': classInfo?.scheduleHint || '',
         'Nhóm chuyên môn': classInfo ? classInfo.categoryGroup : '',
         'Hình thức tuyển chọn': classInfo ? (classInfo.isExamRequired ? 'Thi tuyển' : 'Đăng ký tự do') : '',
         'Học phí': 'Miễn phí 100%',

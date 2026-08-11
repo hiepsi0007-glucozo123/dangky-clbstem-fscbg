@@ -23,6 +23,7 @@ export interface StemClass {
   equipmentFeeNotes: string; // "8 - 10 triệu / HS" or "Không tốn vật tư"
   icon: string;
   scheduleHint?: string;
+  teacher?: string;
   highlights: string[];
   docUrl?: string;
 }

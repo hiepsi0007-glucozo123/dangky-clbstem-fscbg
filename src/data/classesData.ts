@@ -18,7 +18,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: false,
     equipmentFeeNotes: 'Không tốn vật tư',
     icon: 'Code',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ hai',
+    teacher: 'Cô Thân Thị Thu',
     highlights: ['Lập trình kéo thả khối lệnh', 'Xây dựng trò chơi tư duy', 'Làm quen đề thi Tin học trẻ cấp trường'],
     docUrl: 'https://docs.google.com/document/d/1a830L1Ht52efahMCADmnhMkK6P_2kzGZ/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -38,7 +39,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: false,
     equipmentFeeNotes: 'Không tốn vật tư',
     icon: 'Terminal',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ ba',
+    teacher: 'Cô Thân Thị Thu',
     highlights: ['Thi Tin học trẻ cấp phường / Tỉnh / Quốc gia', 'Lập trình thuật toán nâng cao', 'Xây dựng dự án STEM liên môn'],
     docUrl: 'https://docs.google.com/document/d/1a830L1Ht52efahMCADmnhMkK6P_2kzGZ/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -47,7 +49,7 @@ export const CLASSES_DATA: StemClass[] = [
     code: 'CPP-01',
     name: 'Lập trình C++ 1: C++ Cơ bản',
     categoryGroup: 'Lập trình',
-    description: 'Học sinh có tư duy logic tốt, đam mê lập trình, đi từ cơ bản đến nâng cao, chuẩn bị cho các kỳ thi Tin học trẻ và lập trình thi đấu.',
+    description: 'Học sinh có tư duy logic tốt, đam đam mê lập trình, đi từ cơ bản đến nâng cao, chuẩn bị cho các kỳ thi Tin học trẻ và lập trình thi đấu.',
     targetGrades: 'Dành cho HS THCS lớp 6–8',
     gradeLevels: [6, 7, 8, 9],
     schoolLevels: ['THCS'],
@@ -58,7 +60,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: false,
     equipmentFeeNotes: 'Không tốn vật tư',
     icon: 'Cpu',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ tư',
+    teacher: 'Thầy Nguyễn Thế Hiệp',
     highlights: ['Cấu trúc dữ liệu & Thuật toán', 'Luyện đề HSG & Tin học trẻ', 'Rèn tư duy lập trình thi đấu (competitive programming)'],
     docUrl: 'https://docs.google.com/document/d/1n7tpDxbtXLch1zRK7k373tOZvF5Qy1H7/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -78,7 +81,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: false,
     equipmentFeeNotes: 'Không tốn vật tư',
     icon: 'Binary',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ năm',
+    teacher: 'Thầy Nguyễn Thế Hiệp',
     highlights: ['Lý thuyết đồ thị & Quy hoạch động', 'Đội tuyển HSG Chuyên & Quốc gia', 'Cơ hội săn học bổng Công nghệ FPT'],
     docUrl: 'https://docs.google.com/document/d/1n7tpDxbtXLch1zRK7k373tOZvF5Qy1H7/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -100,7 +104,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'PH đóng góp vật tư (8 - 10 triệu/HS)',
     icon: 'Boxes',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ tư',
+    teacher: 'Thầy Đỗ Minh Tiến',
     highlights: ['Chuẩn VEX Robotics Quốc tế', 'Lập trình VEXcode VR & IQ', 'Rèn kỹ năng làm việc nhóm STEM'],
     docUrl: 'https://docs.google.com/document/d/1xT2csMn0tDp1n1fWBSyRFtsQOG6d5Dhm/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -120,7 +125,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'PH đóng góp vật tư (8 - 10 triệu/HS)',
     icon: 'Layers',
-    scheduleHint: 'Chiều Thứ 7 (14h00 - 16h30)',
+    scheduleHint: 'Thứ năm',
+    teacher: 'Thầy Nghiêm Xuân Tiến',
     highlights: ['Luyện đề thi sa bàn VEX IQ hàng năm', 'Tự động hóa cảm biến gia tốc, khoảng cách', 'Chinh phục VEX Worlds Mỹ'],
     docUrl: 'https://docs.google.com/document/d/1xT2csMn0tDp1n1fWBSyRFtsQOG6d5Dhm/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -140,7 +146,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'PH đóng góp vật tư (8 - 10 triệu/HS)',
     icon: 'Wrench',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ năm (Đội 1) & Thứ sáu (Đội 2)',
+    teacher: 'Thầy Đặng Đức Hạnh',
     highlights: ['Cấu trúc kim loại VEX V5 nâng cao', 'Lập trình C++/Python cho V5', 'Luyện tập cho giải đấu VEX V5 chính thức'],
     docUrl: 'https://docs.google.com/document/d/1xT2csMn0tDp1n1fWBSyRFtsQOG6d5Dhm/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -160,7 +167,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'PH đóng góp vật tư (8 - 10 triệu/HS)',
     icon: 'Trophy',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ năm (Đội 1) & Thứ sáu (Đội 2)',
+    teacher: 'Thầy Đặng Đức Hạnh',
     highlights: ['Thiết kế cơ khí & lắp ráp robot thi đấu FTC', 'Lập trình điều khiển nâng cao (block-based/Java)', 'Thi đấu cấp Quốc tế FIRST'],
     docUrl: 'https://docs.google.com/document/d/1xT2csMn0tDp1n1fWBSyRFtsQOG6d5Dhm/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -203,7 +211,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'Vòng 1: Miễn phí | Vòng 2: PH đóng 8-10 triệu vật tư',
     icon: 'Bot',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ năm',
+    teacher: 'Cô Trần Thị Nhung',
     highlights: ['Vòng 1: Thi Online (Không mất phí)', 'Vòng 2: Thi sa bàn (PH đóng phí 8-10 triệu)', 'Lắp ráp robot theo bộ kit & lập trình cảm biến'],
     docUrl: 'https://docs.google.com/document/d/1v3XQGFpwcb8nFtmzXuN0UdiW0tmkfoSz/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -223,7 +232,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'Vòng 1: Miễn phí | Vòng 2: PH đóng 8-10 triệu vật tư',
     icon: 'BotLike',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ tư',
+    teacher: 'Cô Trần Thị Nhung',
     highlights: ['Vòng 1: Thi Online (Không mất phí)', 'Vòng 2: Thi sa bàn (PH đóng phí 8-10 triệu)', 'Cơ khí & lập trình cảm biến thi đấu Robocon'],
     docUrl: 'https://docs.google.com/document/d/1v3XQGFpwcb8nFtmzXuN0UdiW0tmkfoSz/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -243,7 +253,8 @@ export const CLASSES_DATA: StemClass[] = [
     hasEquipmentFee: true,
     equipmentFeeNotes: 'Vòng 1: Miễn phí | Vòng 2: PH đóng 8-10 triệu vật tư',
     icon: 'ShieldZap',
-    scheduleHint: 'Thông báo sau khi thi tuyển',
+    scheduleHint: 'Thứ hai',
+    teacher: 'Cô Trần Thị Nhung',
     highlights: ['Vòng 1: Thi Online (Không mất phí)', 'Vòng 2: Thi sa bàn (PH đóng phí 8-10 triệu)', 'Thiết kế cơ khí & chế tạo robot chuyên sâu'],
     docUrl: 'https://docs.google.com/document/d/1v3XQGFpwcb8nFtmzXuN0UdiW0tmkfoSz/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true'
   },
@@ -262,7 +273,7 @@ export const CLASSES_DATA: StemClass[] = [
     tuitionFee: 'Miễn phí học phí 100%',
     hasEquipmentFee: true,
     equipmentFeeNotes: 'PH đóng góp vật tư (8 - 10 triệu/HS)',
-    icon: 'Zap',
+    icon: 'Zap', 
     scheduleHint: 'Thông báo sau khi thi tuyển',
     highlights: ['Lập trình điều khiển drone nâng cao, xử lý đa nhiệm vụ', 'Kỹ năng đo đạc địa điểm, viết & chỉnh sửa code thực chiến', 'Luyện tập thi đấu cá nhân, chuẩn bị vòng quốc gia/quốc tế'],
     docUrl: 'https://docs.google.com/document/d/1natBgdjwJWW613ao4MpbT0VwU-W9f-2q/edit?usp=sharing&ouid=115389301456460534953&rtpof=true&sd=true/'

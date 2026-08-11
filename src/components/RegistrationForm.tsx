@@ -611,7 +611,24 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
                       </div>
                     )}
 
-                    <div className="mt-4 pt-3 border-t border-slate-200/60 flex items-center justify-between gap-2 text-xs font-medium">
+                    {(cls.teacher || cls.scheduleHint) && (
+                      <div className="mt-3 pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+                        {cls.teacher && (
+                          <span className="text-slate-600 font-semibold flex items-center gap-1">
+                            <span className="text-slate-400">GV phụ trách:</span>
+                            <strong className="text-[#002D62] font-extrabold">{cls.teacher}</strong>
+                          </span>
+                        )}
+                        {cls.scheduleHint && (
+                          <span className="text-slate-600 font-semibold flex items-center gap-1">
+                            <span className="text-slate-400">Lịch học:</span>
+                            <strong className="text-[#F26522] font-extrabold">{cls.scheduleHint}</strong>
+                          </span>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="mt-3 pt-2.5 border-t border-slate-200/60 flex items-center justify-between gap-2 text-xs font-medium">
                       {cls.isExamRequired ? (
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white font-black text-xs shadow-xs animate-badge-amber border border-amber-300">
                           <Zap className="w-3.5 h-3.5 text-amber-200 fill-amber-200 animate-bounce shrink-0" />

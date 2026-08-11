@@ -5,7 +5,7 @@ import {
   Bot, ShieldAlert, Boxes, Layers, 
   Wrench, Trophy, Zap, Plane, CheckCircle, 
   Users, ArrowRight, FileText, ExternalLink,
-  Award, Medal, Crown, Globe, Laptop, Rocket, Gamepad2
+  Award, Medal, Crown, Globe, Laptop, Rocket, Gamepad2, UserCheck, Calendar
 } from 'lucide-react';
 
 interface ClassCardProps {
@@ -167,10 +167,23 @@ export const ClassCard: React.FC<ClassCardProps> = ({ stemClass, onSelectClass, 
               </span>
             </div>
 
+            {stemClass.teacher && (
+              <div className="flex items-center justify-between text-slate-500 text-[11px]">
+                <span className="flex items-center gap-1">
+                  <UserCheck className="w-3 h-3 text-[#002D62]" />
+                  <span>GV phụ trách:</span>
+                </span>
+                <span className="font-bold text-[#002D62]">{stemClass.teacher}</span>
+              </div>
+            )}
+
             {stemClass.scheduleHint && (
               <div className="flex items-center justify-between text-slate-500 text-[11px]">
-                <span>Lịch học dự kiến:</span>
-                <span className="font-medium text-slate-700">{stemClass.scheduleHint}</span>
+                <span className="flex items-center gap-1">
+                  <Calendar className="w-3 h-3 text-[#F26522]" />
+                  <span>Lịch học dự kiến:</span>
+                </span>
+                <span className="font-bold text-[#F26522]">{stemClass.scheduleHint}</span>
               </div>
             )}
           </div>

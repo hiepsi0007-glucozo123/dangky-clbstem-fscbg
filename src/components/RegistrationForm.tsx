@@ -284,7 +284,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs">
         <div className="flex items-center justify-between text-xs font-bold text-slate-500 mb-4">
           <span className="text-[#002D62] text-sm font-extrabold uppercase tracking-wide">
-            Đăng ký CLB Năng khiếu STEM FPT Bắc Giang
+            Đăng Ký CLB Năng Khiếu FPT Bắc Giang
           </span>
           <span>Bước {step} / 3</span>
         </div>

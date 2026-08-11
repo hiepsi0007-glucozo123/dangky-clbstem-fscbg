@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
       {/* Top Notification Bar */}
       <div className="bg-gradient-to-r from-[#002D62] via-[#00539C] to-[#F26522] text-white py-1.5 px-2 sm:px-4 text-[11px] sm:text-xs font-medium text-center flex items-center justify-center gap-1.5 leading-snug">
         <Sparkles className="w-3.5 h-3.5 animate-pulse text-amber-300 shrink-0" />
-        <span className="line-clamp-2 sm:line-clamp-none">Mở cổng đăng ký CLB Năng khiếu STEM, Robocon & Drone - Trường TH, THCS & THPT FPT Bắc Giang (2026 – 2027)</span>
+        <span className="line-clamp-2 sm:line-clamp-none">Mở cổng Đăng Ký CLB Năng Khiếu FPT Bắc Giang (2026 – 2027)</span>
       </div>
 
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">

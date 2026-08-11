@@ -136,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
       <div className="lg:hidden flex items-center justify-between gap-1 p-1.5 border-t border-slate-100 text-xs font-semibold overflow-x-auto bg-slate-50/50">
         <button
           onClick={() => setActiveTab('register')}
-          className={`flex-1 min-w-[72px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
+          className={`flex-1 min-w-[80px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
             activeTab === 'register' ? 'bg-[#F26522] text-white font-extrabold shadow-xs' : 'text-slate-700 hover:bg-white'
           }`}
         >
@@ -144,27 +144,19 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
         </button>
         <button
           onClick={() => setActiveTab('classes')}
-          className={`flex-1 min-w-[72px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
+          className={`flex-1 min-w-[80px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
             activeTab === 'classes' ? 'bg-[#002D62] text-white font-extrabold shadow-xs' : 'text-slate-700 hover:bg-white'
           }`}
         >
           2. 13 Lớp
         </button>
         <button
-          onClick={() => setActiveTab('home')}
-          className={`flex-1 min-w-[72px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
-            activeTab === 'home' ? 'bg-[#002D62] text-white font-extrabold shadow-xs' : 'text-slate-700 hover:bg-white'
-          }`}
-        >
-          3. Trang chủ
-        </button>
-        <button
           onClick={() => setActiveTab('lookup')}
-          className={`flex-1 min-w-[72px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
+          className={`flex-1 min-w-[80px] py-2 px-2.5 rounded-lg text-center whitespace-nowrap transition-all cursor-pointer ${
             activeTab === 'lookup' ? 'bg-[#002D62] text-white font-extrabold shadow-xs' : 'text-slate-700 hover:bg-white'
           }`}
         >
-          4. Tra cứu
+          3. Tra cứu
         </button>
       </div>
     </header>

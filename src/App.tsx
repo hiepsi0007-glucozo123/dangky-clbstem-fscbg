@@ -9,7 +9,7 @@ import { Footer } from './components/Footer';
 
 import { CLASSES_DATA } from './data/classesData';
 import { StemClass, CategoryGroup, RegistrationRecord } from './types';
-import { getStoredRegistrations } from './utils/storage';
+import { getStoredRegistrations, getClassesWithCounts } from './utils/storage';
 import { Search, Sparkles, Filter, CheckCircle2, ShieldAlert } from 'lucide-react';
 
 export default function App() {
@@ -20,15 +20,15 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryGroup | 'Tất cả'>('Tất cả');
   const [gradeFilter, setGradeFilter] = useState<number | 0>(0); // 0 = All
 
-  const [totalRecords, setTotalRecords] = useState<number>(0);
+  const [records, setRecords] = useState<RegistrationRecord[]>([]);
 
-  const refreshTotal = () => {
+  const refreshData = () => {
     const list = getStoredRegistrations();
-    setTotalRecords(list.length);
+    setRecords(list);
   };
 
   useEffect(() => {
-    refreshTotal();
+    refreshData();
   }, [activeTab]);
 
   const handleSelectClassToRegister = (cls: StemClass) => {
@@ -38,11 +38,14 @@ export default function App() {
   };
 
   const handleRegistrationSuccess = (record: RegistrationRecord) => {
-    refreshTotal();
+    refreshData();
   };
 
+  // Dynamic class data with calculated currentStudents count based on accepted status
+  const dynamicClasses = getClassesWithCounts(records);
+
   // Filtered classes list
-  const filteredClasses = CLASSES_DATA.filter((c) => {
+  const filteredClasses = dynamicClasses.filter((c) => {
     const matchCat = selectedCategory === 'Tất cả' || c.categoryGroup === selectedCategory;
     const matchGrade = gradeFilter === 0 || c.gradeLevels.includes(gradeFilter);
     return matchCat && matchGrade;
@@ -52,7 +55,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-100/70 text-slate-800 font-sans flex flex-col justify-between">
       <div>
         {/* Main Header Bar */}
-        <Header activeTab={activeTab} setActiveTab={setActiveTab} totalCount={totalRecords} />
+        <Header activeTab={activeTab} setActiveTab={setActiveTab} totalCount={records.length} />
 
         {/* Main Body Content Container */}
         <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8">
@@ -88,9 +91,9 @@ export default function App() {
                   </button>
                 </div>
 
-                {/* 5 Category Filter Pills */}
+                {/* 4 Category Filter Pills */}
                 <div className="flex flex-wrap items-center gap-2">
-                  {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone', 'Năng khiếu Vibe Coding'] as const).map((cat) => (
+                  {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone'] as const).map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
@@ -156,7 +159,7 @@ export default function App() {
                       Lọc theo Nhóm Nội Dung:
                     </label>
                     <div className="flex flex-wrap gap-1.5 text-xs">
-                      {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone', 'Năng khiếu Vibe Coding'] as const).map((cat) => (
+                      {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone'] as const).map((cat) => (
                         <button
                           key={cat}
                           onClick={() => setSelectedCategory(cat)}
@@ -308,6 +311,7 @@ export default function App() {
           {activeTab === 'register' && (
             <RegistrationForm
               preselectedClass={selectedClass}
+              classesList={dynamicClasses}
               onSuccess={handleRegistrationSuccess}
               onBackToClasses={() => setActiveTab('classes')}
             />

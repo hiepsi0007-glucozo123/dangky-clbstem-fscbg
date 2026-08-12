@@ -1,5 +1,5 @@
-import { RegistrationRecord } from '../types';
-import { INITIAL_REGISTRATION_RECORDS } from '../data/classesData';
+import { RegistrationRecord, StemClass } from '../types';
+import { INITIAL_REGISTRATION_RECORDS, CLASSES_DATA } from '../data/classesData';
 
 const STORAGE_KEY = 'stem_fpt_bg_registrations_2026';
 
@@ -82,5 +82,21 @@ export const findRecordByTrackingCodeOrPhone = (query: string): RegistrationReco
     (r.zaloPhone && r.zaloPhone.includes(q)) ||
     (r.studentName && r.studentName.toLowerCase().includes(q))
   );
+};
+
+export const getClassesWithCounts = (customRecords?: RegistrationRecord[]): StemClass[] => {
+  const records = customRecords || getStoredRegistrations();
+  const acceptedMap = new Map<string, number>();
+
+  records.forEach(r => {
+    if (r.status === 'Trúng tuyển chính thức') {
+      acceptedMap.set(r.selectedClassId, (acceptedMap.get(r.selectedClassId) || 0) + 1);
+    }
+  });
+
+  return CLASSES_DATA.map(cls => ({
+    ...cls,
+    currentStudents: acceptedMap.get(cls.id) || 0
+  }));
 };
 

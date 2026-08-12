@@ -11,15 +11,18 @@ import {
 
 interface RegistrationFormProps {
   preselectedClass?: StemClass | null;
+  classesList?: StemClass[];
   onSuccess: (record: RegistrationRecord) => void;
   onBackToClasses: () => void;
 }
 
 export const RegistrationForm: React.FC<RegistrationFormProps> = ({
   preselectedClass,
+  classesList,
   onSuccess,
   onBackToClasses
 }) => {
+  const currentClasses = classesList && classesList.length > 0 ? classesList : CLASSES_DATA;
   // Current Step: 1 = Info, 2 = Class Selection, 3 = Commitments, 4 = Success
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
 
@@ -108,9 +111,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     if (!selectedClassId) {
       errs.selectedClassId = 'Vui lòng chọn 1 lớp học để đăng ký';
     } else {
-      const cls = CLASSES_DATA.find(c => c.id === selectedClassId);
+      const cls = currentClasses.find(c => c.id === selectedClassId);
       if (cls && cls.currentStudents >= cls.maxStudents) {
-        errs.selectedClassId = 'Lớp học này đã đủ chỉ tiêu, vui lòng chọn lớp khác';
+        errs.selectedClassId = `⚠️ Lớp ${cls.name} đã đủ chỉ tiêu trúng tuyển (${cls.currentStudents}/${cls.maxStudents} HS). Vui lòng chọn lớp học khác còn chỉ tiêu!`;
       }
     }
     setErrors(errs);
@@ -139,7 +142,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     e.preventDefault();
     if (validateStep1()) {
       // Auto pre-select first matching class for current grade if none selected or if selected class doesn't match grade
-      const matches = CLASSES_DATA.filter(c => c.gradeLevels.includes(currentGrade));
+      const matches = currentClasses.filter(c => c.gradeLevels.includes(currentGrade));
       const currentSelectionValid = matches.some(c => c.id === selectedClassId);
       if ((!selectedClassId || !currentSelectionValid) && matches.length > 0) {
         const available = matches.find(c => c.currentStudents < c.maxStudents) || matches[0];
@@ -177,6 +180,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
     const randomSuffix = Math.random().toString(36).substring(2, 7).toUpperCase();
     const trackingCode = `STEM-2026-${randomSuffix}`;
 
+    const isClassFull = currentSelectedClassObj ? currentSelectedClassObj.currentStudents >= currentSelectedClassObj.maxStudents : false;
+
     const newRecord: RegistrationRecord = {
       id: `reg-${Date.now()}`,
       trackingCode,
@@ -196,7 +201,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       competitionNational,
       competitionInternational,
       notes,
-      status: 'Chờ sơ loại'
+      status: isClassFull ? 'Vượt chỉ tiêu (Chờ bổ sung)' : 'Chờ sơ loại'
     };
 
     // Save to persistence
@@ -273,10 +278,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
 
   // Filter classes based on current student grade
-  const matchingClasses = CLASSES_DATA.filter(c => c.gradeLevels.includes(currentGrade));
-  const otherClasses = CLASSES_DATA.filter(c => !c.gradeLevels.includes(currentGrade));
+  const matchingClasses = currentClasses.filter(c => c.gradeLevels.includes(currentGrade));
+  const otherClasses = currentClasses.filter(c => !c.gradeLevels.includes(currentGrade));
 
-  const currentSelectedClassObj = CLASSES_DATA.find(c => c.id === selectedClassId);
+  const currentSelectedClassObj = currentClasses.find(c => c.id === selectedClassId);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
@@ -622,7 +627,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
                         </div>
                         <div className="text-slate-800 space-y-0.5 font-medium">
                           <div className="text-emerald-800">🟢 <strong>Vòng 1:</strong> Thi Online — Không mất phí</div>
-                          <div className="text-amber-900">🟠 <strong>Vòng 2:</strong> Thi thực hành sa bàn — PH đóng phí 8–10 triệu</div>
+                          <div className="text-amber-900">🟠 <strong>Vòng 2:</strong> Đóng phí theo nhu cầu thực tế cuộc thi</div>
                         </div>
                       </div>
                     )}
@@ -1040,15 +1045,6 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
                     <Table className="w-4 h-4 text-emerald-600" />
                     Đồng bộ Google Sheets thành công!
                   </span>
-                  <a
-                    href="https://docs.google.com/spreadsheets/d/1-gEeQfiw830niRJ0chGufp497sW6n0VY917OeKQD_zM/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-emerald-700 underline flex items-center gap-1 hover:text-emerald-900 font-bold"
-                  >
-                    Xem Sheet
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
                 <p className="text-[11px] text-emerald-700">
                   Dữ liệu đăng ký của {completedRecord.studentName} đã tự động được thêm vào Google Sheet của trường.

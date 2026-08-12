@@ -328,7 +328,7 @@ export const CLASSES_DATA: StemClass[] = [
     targetGrades: 'Dành cho HS Tiểu học lớp 3–5',
     gradeLevels: [2, 3],
     schoolLevels: ['Tiểu học'],
-    maxStudents: 15,
+    maxStudents: 3,
     currentStudents: 0,
     isExamRequired: true,
     tuitionFee: 'Miễn phí học phí 100%',

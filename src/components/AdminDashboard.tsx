@@ -132,10 +132,15 @@ export const AdminDashboard: React.FC = () => {
   const internationalAgreedCount = records.filter(r => r.competitionInternational).length;
   const internationalPercentage = totalRegistrations > 0 ? Math.round((internationalAgreedCount / totalRegistrations) * 100) : 0;
 
-  // Class enrollment count map
-  const classCountMap = new Map<string, number>();
+  // Class enrollment count map (Accepted vs Total Applications)
+  const classAcceptedCountMap = new Map<string, number>();
+  const classTotalCountMap = new Map<string, number>();
+  
   records.forEach(r => {
-    classCountMap.set(r.selectedClassId, (classCountMap.get(r.selectedClassId) || 0) + 1);
+    classTotalCountMap.set(r.selectedClassId, (classTotalCountMap.get(r.selectedClassId) || 0) + 1);
+    if (r.status === 'Trúng tuyển chính thức') {
+      classAcceptedCountMap.set(r.selectedClassId, (classAcceptedCountMap.get(r.selectedClassId) || 0) + 1);
+    }
   });
 
   // Export handler
@@ -186,7 +191,6 @@ export const AdminDashboard: React.FC = () => {
               type="password"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
-              placeholder="Mật khẩu Admin (mẫu: stem2026)"
               className="w-full px-4 py-3 rounded-2xl border border-slate-300 text-center text-sm font-mono focus:outline-none focus:border-[#F26522]"
             />
             {authError && <p className="text-xs text-rose-500 font-semibold mt-1">{authError}</p>}
@@ -256,14 +260,6 @@ export const AdminDashboard: React.FC = () => {
           >
             <Download className="w-5 h-5 text-blue-200" />
             <span>Tải Excel (.xlsx)</span>
-          </button>
-
-          <button
-            onClick={() => setShowResetConfirm(true)}
-            className="p-3 rounded-2xl border border-slate-300 text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer"
-            title="Khôi phục dữ liệu mẫu"
-          >
-            <RefreshCw className="w-4 h-4" />
           </button>
 
           <button
@@ -356,39 +352,78 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Class Capacity Alert Section */}
-      <div className="bg-white p-6 rounded-3xl border border-slate-200 space-y-4">
-        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2">
-          <BarChart2 className="w-4 h-4 text-[#F26522]" />
-          Thống kê Sĩ số {CLASSES_DATA.length} Lớp & Cảnh báo Chỉ tiêu (Tối đa 15 HS/lớp)
-        </h3>
+      <div className="bg-white p-6 rounded-3xl border border-slate-200 space-y-4 shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+          <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wide flex items-center gap-2">
+            <BarChart2 className="w-4 h-4 text-[#F26522]" />
+            Thống kê Sĩ số Trúng tuyển {CLASSES_DATA.length} Lớp (Tối đa per lớp)
+          </h3>
+          <span className="text-xs text-slate-500 font-medium">
+            Thanh sĩ số tăng tự động khi Admin xét <strong className="text-emerald-700 font-bold">"Trúng tuyển chính thức"</strong>
+          </span>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
           {CLASSES_DATA.map((cls) => {
-            const count = classCountMap.get(cls.id) || 0;
-            const isFull = count >= cls.maxStudents;
-            const isAlmostFull = count >= cls.maxStudents - 3 && !isFull;
+            const acceptedCount = classAcceptedCountMap.get(cls.id) || 0;
+            const totalApps = classTotalCountMap.get(cls.id) || 0;
+            const isFull = acceptedCount >= cls.maxStudents;
+            const isAlmostFull = acceptedCount >= cls.maxStudents - 3 && !isFull;
 
             return (
               <div
                 key={cls.id}
                 onClick={() => setFilterClassId(filterClassId === cls.id ? 'all' : cls.id)}
-                className={`p-3 rounded-xl border transition-all cursor-pointer ${
+                className={`p-3 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                   filterClassId === cls.id 
-                    ? 'ring-2 ring-[#F26522] border-[#F26522] bg-orange-50' 
+                    ? 'ring-2 ring-[#F26522] border-[#F26522] bg-orange-50/80 shadow-xs' 
                     : isFull 
-                      ? 'bg-rose-50 border-rose-200 text-rose-900' 
+                      ? 'bg-rose-50/80 border-rose-300 text-rose-900' 
                       : isAlmostFull 
-                        ? 'bg-amber-50 border-amber-200 text-amber-900' 
-                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
+                        ? 'bg-amber-50/80 border-amber-300 text-amber-900' 
+                        : 'bg-slate-50/80 border-slate-200 hover:border-slate-300'
                 }`}
               >
-                <div className="flex items-center justify-between font-bold">
-                  <span className="truncate">{cls.code}</span>
-                  {isFull && <span className="text-[10px] bg-rose-600 text-white px-1.5 rounded">ĐỦ</span>}
+                <div>
+                  <div className="flex items-center justify-between font-bold">
+                    <span className="truncate text-slate-900 font-extrabold">{cls.code}</span>
+                    {isFull ? (
+                      <span className="text-[10px] bg-rose-600 text-white font-black px-1.5 py-0.5 rounded-md shadow-2xs">ĐỦ CHỈ TIÊU</span>
+                    ) : isAlmostFull ? (
+                      <span className="text-[10px] bg-amber-500 text-white font-black px-1.5 py-0.5 rounded-md">SẮP ĐỦ</span>
+                    ) : null}
+                  </div>
+                  <div className="text-[11px] text-slate-600 truncate mt-0.5 font-medium">{cls.name.split(':')[0]}</div>
                 </div>
-                <div className="text-[11px] text-slate-600 truncate mt-0.5">{cls.name.split(':')[0]}</div>
-                <div className="font-extrabold text-slate-900 mt-1">
-                  {count} / {cls.maxStudents} HS
+
+                <div className="mt-2.5 space-y-1">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-black text-slate-900">
+                      {acceptedCount} / {cls.maxStudents} HS
+                    </span>
+                    <span className="text-[10px] font-semibold text-slate-500">
+                      {Math.round((acceptedCount / cls.maxStudents) * 100)}%
+                    </span>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div 
+                      className={`h-full rounded-full transition-all duration-300 ${
+                        isFull 
+                          ? 'bg-rose-600' 
+                          : isAlmostFull 
+                            ? 'bg-amber-500' 
+                            : 'bg-emerald-600'
+                      }`}
+                      style={{ width: `${Math.min(100, (acceptedCount / cls.maxStudents) * 100)}%` }}
+                    />
+                  </div>
+
+                  <div className="text-[10px] text-slate-500 pt-0.5 flex items-center justify-between">
+                    <span>Trúng tuyển chính thức</span>
+                    <span className="font-bold text-slate-700">({totalApps} ĐK)</span>
+                  </div>
                 </div>
               </div>
             );

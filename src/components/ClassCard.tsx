@@ -147,7 +147,7 @@ export const ClassCard: React.FC<ClassCardProps> = ({ stemClass, onSelectClass, 
                 </div>
                 <div className="flex items-start gap-1.5 text-amber-900 bg-amber-50/80 p-1.5 rounded-lg border border-amber-200/60">
                   <span className="font-bold shrink-0 text-amber-800">🟠 Vòng 2:</span>
-                  <span>Thi thực hành sa bàn — Phụ huynh đóng phí vật tư <strong className="font-extrabold text-amber-900">8 - 10 triệu đồng</strong></span>
+                  <span>Đóng phí theo nhu cầu thực tế cuộc thi</span>
                 </div>
               </div>
             </div>

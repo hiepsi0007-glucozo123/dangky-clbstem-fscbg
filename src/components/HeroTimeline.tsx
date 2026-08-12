@@ -101,14 +101,6 @@ export const HeroTimeline: React.FC<HeroTimelineProps> = ({ onStartRegister, onE
               <h3 className="font-bold text-white text-base">2 Lớp Drone</h3>
               <p className="text-xs text-slate-300">Lập trình bay không người lái, điều khiển FPV & nhận diện AI.</p>
             </div>
-
-            <div className="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/15 space-y-2 sm:col-span-2">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-300">
-                <Code2 className="w-5 h-5" />
-              </div>
-              <h3 className="font-bold text-white text-base">2 Lớp Vibe Coding</h3>
-              <p className="text-xs text-slate-300">Lập trình sáng tạo hỗ trợ AI cho THCS & THPT. Phát triển sản phẩm ứng dụng thực tế.</p>
-            </div>
           </div>
         </div>
       </div>

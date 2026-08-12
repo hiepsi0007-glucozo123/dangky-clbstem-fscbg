@@ -40,7 +40,6 @@ export const Footer: React.FC = () => {
               <li>• Robocon TH, THCS & THPT</li>
               <li>• VEX IQ, VEX V5 & FTC (Robot Mỹ)</li>
               <li>• Drone & Robocon Hàng Không</li>
-              <li>• Năng khiếu Vibe Coding (THCS & THPT)</li>
             </ul>
           </div>
 

@@ -1121,7 +1121,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             </h4>
             <ol className="list-decimal list-inside text-xs text-slate-700 space-y-2 font-medium">
               <li>
-                <strong>Vòng sơ loại Online (11/08 – 18/08/2026):</strong> Ban tổ chức sẽ gửi link thử thách tư duy Online qua Zalo SĐT <span className="text-[#F26522] font-bold">{completedRecord.zaloPhone}</span> và Email <span className="underline">{completedRecord.email}</span>.
+                <strong>Vòng sơ loại Online (13/08 – 18/08/2026):</strong> Ban tổ chức sẽ gửi link thử thách tư duy Online qua Zalo SĐT <span className="text-[#F26522] font-bold">{completedRecord.zaloPhone}</span> và Email <span className="underline">{completedRecord.email}</span>.
               </li>
               <li>
                 <strong>Tham gia Nhóm Zalo Hỗ trợ STEM:</strong> Phụ huynh vui lòng quét mã Zalo hoặc ấn nút bên dưới để tham gia nhóm cập nhật thông báo lịch thi Offline.

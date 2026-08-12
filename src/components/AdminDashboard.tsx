@@ -359,7 +359,7 @@ export const AdminDashboard: React.FC = () => {
       <div className="bg-white p-6 rounded-3xl border border-slate-200 space-y-4">
         <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2">
           <BarChart2 className="w-4 h-4 text-[#F26522]" />
-          Thống kê Sĩ số 13 Lớp & Cảnh báo Chỉ tiêu (Tối đa 15 HS/lớp)
+          Thống kê Sĩ số {CLASSES_DATA.length} Lớp & Cảnh báo Chỉ tiêu (Tối đa 15 HS/lớp)
         </h3>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
@@ -419,7 +419,7 @@ export const AdminDashboard: React.FC = () => {
               onChange={(e) => setFilterClassId(e.target.value)}
               className="px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold text-slate-700 focus:outline-none focus:border-[#F26522]"
             >
-              <option value="all">Tất cả 13 Lớp CLB</option>
+              <option value="all">Tất cả {CLASSES_DATA.length} Lớp CLB</option>
               {CLASSES_DATA.map(c => (
                 <option key={c.id} value={c.id}>{c.code} - {c.name}</option>
               ))}

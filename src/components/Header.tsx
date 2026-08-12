@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Sparkles, BookOpen, Clock } from 'lucide-react';
+import { CLASSES_DATA } from '../data/classesData';
 
 interface HeaderProps {
   activeTab: 'home' | 'classes' | 'register' | 'lookup' | 'admin';
@@ -103,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
               }`}
             >
               <Clock className="w-4 h-4" />
-              <span>2. Danh sách 13 Lớp</span>
+              <span>2. Danh sách {CLASSES_DATA.length} Lớp</span>
             </button>
 
             <button
@@ -148,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
             activeTab === 'classes' ? 'bg-[#002D62] text-white font-extrabold shadow-xs' : 'text-slate-700 hover:bg-white'
           }`}
         >
-          2. 13 Lớp
+          2. {CLASSES_DATA.length} Lớp
         </button>
         <button
           onClick={() => setActiveTab('lookup')}

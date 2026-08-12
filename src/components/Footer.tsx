@@ -1,5 +1,6 @@
 import React from 'react';
 import { Cpu, MapPin, Phone, Mail, Globe, ShieldCheck } from 'lucide-react';
+import { CLASSES_DATA } from '../data/classesData';
 
 export const Footer: React.FC = () => {
   return (
@@ -31,7 +32,7 @@ export const Footer: React.FC = () => {
           {/* Col 2: Program Groups */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-bold text-amber-300 text-sm uppercase tracking-wider">
-              13 Lớp CLB Năng Khiếu
+              {CLASSES_DATA.length} Lớp CLB Năng Khiếu
             </h4>
             <ul className="text-xs text-blue-100 space-y-1.5 font-medium">
               <li>• Lập trình Scratch 1 & 2 (Tiểu học)</li>
@@ -39,6 +40,7 @@ export const Footer: React.FC = () => {
               <li>• Robocon TH, THCS & THPT</li>
               <li>• VEX IQ, VEX V5 & FTC (Robot Mỹ)</li>
               <li>• Drone & Robocon Hàng Không</li>
+              <li>• Năng khiếu Vibe Coding (THCS & THPT)</li>
             </ul>
           </div>
 

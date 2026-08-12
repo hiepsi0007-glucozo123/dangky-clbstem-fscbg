@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, CheckCircle2, ArrowRight, Award, Zap, Code2, Bot, Plane, Trophy, Users, ShieldAlert, Banknote, Wrench, AlertCircle } from 'lucide-react';
-import { TIMELINE_DATA } from '../data/classesData';
+import { TIMELINE_DATA, CLASSES_DATA } from '../data/classesData';
 
 interface HeroTimelineProps {
   onStartRegister: () => void;
@@ -47,7 +47,7 @@ export const HeroTimeline: React.FC<HeroTimelineProps> = ({ onStartRegister, onE
                 onClick={onExploreClasses}
                 className="w-full sm:w-auto justify-center px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm sm:text-base border border-white/20 transition-all cursor-pointer backdrop-blur-sm"
               >
-                Xem chi tiết 13 Lớp học
+                Xem chi tiết {CLASSES_DATA.length} Lớp học
               </button>
             </div>
 

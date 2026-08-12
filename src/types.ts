@@ -4,7 +4,8 @@ export type CategoryGroup =
   | 'Lập trình' 
   | 'Robocon' 
   | 'Năng khiếu Robot' 
-  | 'Năng khiếu Drone';
+  | 'Năng khiếu Drone'
+  | 'Năng khiếu Vibe Coding';
 
 export interface StemClass {
   id: string;

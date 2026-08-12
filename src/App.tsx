@@ -75,7 +75,7 @@ export default function App() {
                       Danh mục đào tạo
                     </span>
                     <h2 className="text-2xl font-extrabold text-[#002D62]">
-                      13 Lớp CLB Năng Khiếu STEM (Năm học 2026 – 2027)
+                      {CLASSES_DATA.length} Lớp CLB Năng Khiếu STEM (Năm học 2026 – 2027)
                     </h2>
                   </div>
 
@@ -83,14 +83,14 @@ export default function App() {
                     onClick={() => setActiveTab('classes')}
                     className="text-xs font-bold text-[#002D62] hover:text-[#F26522] flex items-center gap-1 self-start sm:self-center"
                   >
-                    <span>Xem tất cả 13 Lớp</span>
+                    <span>Xem tất cả {CLASSES_DATA.length} Lớp</span>
                     <span>→</span>
                   </button>
                 </div>
 
-                {/* 4 Category Filter Pills */}
+                {/* 5 Category Filter Pills */}
                 <div className="flex flex-wrap items-center gap-2">
-                  {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone'] as const).map((cat) => (
+                  {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone', 'Năng khiếu Vibe Coding'] as const).map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
@@ -129,7 +129,7 @@ export default function App() {
                       Thông tin tuyển sinh chi tiết
                     </span>
                     <h1 className="text-2xl sm:text-3xl font-extrabold text-[#002D62] mt-0.5">
-                      Danh Sách 13 Lớp CLB Năng Khiếu STEM FPT
+                      Danh Sách {CLASSES_DATA.length} Lớp CLB Năng Khiếu STEM FPT
                     </h1>
                     <p className="text-xs text-slate-500 mt-1">
                       Nhà trường tài trợ 100% học phí. Phụ huynh chỉ đóng góp vật tư tiêu hao đối với các lớp Robot/Drone.

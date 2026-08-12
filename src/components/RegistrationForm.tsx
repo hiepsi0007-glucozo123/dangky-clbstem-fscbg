@@ -1147,7 +1147,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             </button>
 
             <a
-              href="https://zalo.me"
+              href="https://zalo.me/g/pltqmatu1lmlphssqazv"
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 transition-all flex items-center gap-2 cursor-pointer"

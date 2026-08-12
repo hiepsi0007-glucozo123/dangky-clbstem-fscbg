@@ -156,7 +156,7 @@ export default function App() {
                       Lọc theo Nhóm Nội Dung:
                     </label>
                     <div className="flex flex-wrap gap-1.5 text-xs">
-                      {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone'] as const).map((cat) => (
+                      {(['Tất cả', 'Lập trình', 'Robocon', 'Năng khiếu Robot', 'Năng khiếu Drone', 'Năng khiếu Vibe Coding'] as const).map((cat) => (
                         <button
                           key={cat}
                           onClick={() => setSelectedCategory(cat)}

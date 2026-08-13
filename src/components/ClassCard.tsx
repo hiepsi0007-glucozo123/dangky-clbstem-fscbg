@@ -134,56 +134,38 @@ export const ClassCard: React.FC<ClassCardProps> = ({ stemClass, onSelectClass, 
           </div>
 
           {/* Special Robocon 2-Round Clarification Box */}
-          {stemClass.categoryGroup === 'Robocon' && (
-            <div className="p-3 rounded-xl bg-orange-50/95 border border-orange-200 text-xs space-y-1.5 shadow-2xs">
-              <div className="font-extrabold text-[#F26522] flex items-center gap-1.5 uppercase text-[11px] tracking-wide">
-                <Bot className="w-4 h-4 text-[#F26522] shrink-0" />
-                <span>Quy trình 2 Vòng Robocon:</span>
-              </div>
-              <div className="space-y-1 text-slate-800 text-[11px] font-medium pt-0.5">
-                <div className="flex items-start gap-1.5 text-emerald-800 bg-emerald-50/80 p-1.5 rounded-lg border border-emerald-200/60">
-                  <span className="font-bold shrink-0 text-emerald-700">🟢 Vòng 1:</span>
-                  <span>Thi Online — <strong className="underline decoration-emerald-500 font-extrabold text-emerald-800">Không mất phí</strong></span>
-                </div>
-                <div className="flex items-start gap-1.5 text-amber-900 bg-amber-50/80 p-1.5 rounded-lg border border-amber-200/60">
-                  <span className="font-bold shrink-0 text-amber-800">🟠 Vòng 2:</span>
-                  <span>Đóng phí theo nhu cầu thực tế cuộc thi</span>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Schedule & Equipment Cost */}
           <div className="pt-3 border-t border-slate-200/60 space-y-2 text-xs">
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">Học phí:</span>
-              <span className="font-bold text-emerald-700">{stemClass.tuitionFee}</span>
+              <span className="font-bold text-slate-900">Học phí:</span>
+              <span className="font-normal text-slate-700">{stemClass.tuitionFee}</span>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-slate-500">Vật tư thi đấu:</span>
-              <span className={`font-semibold ${stemClass.hasEquipmentFee ? 'text-amber-700' : 'text-slate-700'}`}>
+              <span className="font-bold text-slate-900">Vật tư thi đấu:</span>
+              <span className="font-normal text-slate-700">
                 {stemClass.equipmentFeeNotes}
               </span>
             </div>
 
             {stemClass.teacher && (
-              <div className="flex items-center justify-between text-slate-500 text-[11px]">
-                <span className="flex items-center gap-1">
-                  <UserCheck className="w-3 h-3 text-[#002D62]" />
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="flex items-center gap-1 font-bold text-[#002D62]">
+                  <UserCheck className="w-3.5 h-3.5 text-[#002D62]" />
                   <span>GV phụ trách:</span>
                 </span>
-                <span className="font-bold text-[#002D62]">{stemClass.teacher}</span>
+                <span className="font-normal text-slate-700">{stemClass.teacher}</span>
               </div>
             )}
 
             {stemClass.scheduleHint && (
-              <div className="flex items-center justify-between text-slate-500 text-[11px]">
-                <span className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3 text-[#F26522]" />
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="flex items-center gap-1 font-bold text-[#F26522]">
+                  <Calendar className="w-3.5 h-3.5 text-[#F26522]" />
                   <span>Lịch học dự kiến:</span>
                 </span>
-                <span className="font-bold text-[#F26522]">{stemClass.scheduleHint}</span>
+                <span className="font-normal text-slate-700">{stemClass.scheduleHint}</span>
               </div>
             )}
           </div>

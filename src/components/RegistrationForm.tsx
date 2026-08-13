@@ -635,15 +635,15 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
                     {(cls.teacher || cls.scheduleHint) && (
                       <div className="mt-3 pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px]">
                         {cls.teacher && (
-                          <span className="text-slate-600 font-semibold flex items-center gap-1">
-                            <span className="text-slate-400">GV phụ trách:</span>
-                            <strong className="text-[#002D62] font-extrabold">{cls.teacher}</strong>
+                          <span className="flex items-center gap-1 text-[11px]">
+                            <span className="font-bold text-[#002D62]">GV phụ trách:</span>
+                            <span className="font-normal text-slate-700">{cls.teacher}</span>
                           </span>
                         )}
                         {cls.scheduleHint && (
-                          <span className="text-slate-600 font-semibold flex items-center gap-1">
-                            <span className="text-slate-400">Lịch học:</span>
-                            <strong className="text-[#F26522] font-extrabold">{cls.scheduleHint}</strong>
+                          <span className="flex items-center gap-1 text-[11px]">
+                            <span className="font-bold text-[#F26522]">Lịch học dự kiến:</span>
+                            <span className="font-normal text-slate-700">{cls.scheduleHint}</span>
                           </span>
                         )}
                       </div>

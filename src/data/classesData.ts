@@ -8,7 +8,7 @@ export const CLASSES_DATA: StemClass[] = [
     name: 'Scratch 1: Lập trình Scratch',
     categoryGroup: 'Lập trình',
     description: 'Làm quen tư duy thuật toán qua lập trình kéo-thả, xây dựng nền tảng logic để tham gia các sân chơi Tin học trẻ và chuẩn bị lên lớp Scratch nâng cao',
-    targetGrades: 'Dành cho HS Tiểu học lớp 3–5',
+    targetGrades: 'Dành cho HS Tiểu học lớp 2-3',
     gradeLevels: [2, 3],
     schoolLevels: ['Tiểu học'],
     maxStudents: 15,

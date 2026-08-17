@@ -201,7 +201,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       competitionNational,
       competitionInternational,
       notes,
-      status: isClassFull ? 'Vượt chỉ tiêu (Chờ bổ sung)' : 'Chờ sơ loại'
+      status: isClassFull ? 'Vượt chỉ tiêu (Chờ bổ sung)' : 'Chờ xét duyệt'
     };
 
     // Save to persistence
@@ -323,7 +323,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
               <span>Bước 1: Thông tin Học sinh & Phụ huynh</span>
             </h2>
             <p className="text-xs text-slate-500 mt-1">
-              Vui lòng điền chính xác thông tin để nhà trường liên hệ xếp lớp và gửi đề thi sơ loại Online.
+              Vui lòng điền chính xác thông tin để nhà trường liên hệ xếp lớp và thông báo kết quả.
             </p>
           </div>
 
@@ -1121,7 +1121,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             </h4>
             <ol className="list-decimal list-inside text-xs text-slate-700 space-y-2 font-medium">
               <li>
-                <strong>Vòng sơ loại Online (13/08 – 18/08/2026):</strong> Ban tổ chức sẽ gửi link thử thách tư duy Online qua Zalo SĐT <span className="text-[#F26522] font-bold">{completedRecord.zaloPhone}</span> và Email <span className="underline">{completedRecord.email}</span>.
+                <strong>Tiếp nhận & Xét duyệt hồ sơ:</strong> Ban tổ chức sẽ liên hệ và gửi thông báo qua Zalo SĐT <span className="text-[#F26522] font-bold">{completedRecord.zaloPhone}</span> và Email <span className="underline">{completedRecord.email}</span>.
               </li>
               <li>
                 <strong>Tham gia Nhóm Zalo Hỗ trợ STEM:</strong> Phụ huynh vui lòng quét mã Zalo hoặc ấn nút bên dưới để tham gia nhóm cập nhật thông báo lịch thi Offline.

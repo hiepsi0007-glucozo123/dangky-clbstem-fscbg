@@ -152,7 +152,7 @@ export function formatRecordToRow(record: any, classInfo?: any, stt?: number | s
     record.equipmentCommitment ? 'SẴN SÀNG ĐẦU TƯ' : 'Không',
     record.competitionNational ? 'CÓ (Sẵn sàng)' : 'Không',
     record.competitionInternational ? 'CÓ (Sẵn sàng)' : 'Không',
-    record.status || 'Chờ sơ loại',
+    record.status || 'Chờ xét duyệt',
     record.notes || ''
   ];
 }

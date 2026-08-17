@@ -34,8 +34,8 @@ export type RegistrationPurpose =
   | 'Mong muốn của PH & HS được tham gia học tập và rèn luyện';
 
 export type ApplicationStatus = 
-  | 'Chờ sơ loại'
-  | 'Đã qua sơ loại Online'
+  | 'Chờ xét duyệt'
+  | 'Đã duyệt hồ sơ'
   | 'Trúng tuyển chính thức'
   | 'Vượt chỉ tiêu (Chờ bổ sung)'
   | 'Đã hủy';

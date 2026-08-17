@@ -479,8 +479,8 @@ export const AdminDashboard: React.FC = () => {
               className="px-3 py-2 rounded-xl border border-slate-300 bg-white font-semibold text-slate-700 focus:outline-none focus:border-[#F26522]"
             >
               <option value="all">Tất cả Trạng thái</option>
-              <option value="Chờ sơ loại">Chờ sơ loại</option>
-              <option value="Đã qua sơ loại Online">Đã qua sơ loại Online</option>
+              <option value="Chờ xét duyệt">Chờ xét duyệt</option>
+              <option value="Đã duyệt hồ sơ">Đã duyệt hồ sơ</option>
               <option value="Trúng tuyển chính thức">Trúng tuyển chính thức</option>
               <option value="Vượt chỉ tiêu (Chờ bổ sung)">Vượt chỉ tiêu</option>
             </select>
@@ -620,15 +620,15 @@ export const AdminDashboard: React.FC = () => {
                           className={`px-2.5 py-1 rounded-lg text-xs font-bold border focus:outline-none cursor-pointer ${
                             r.status === 'Trúng tuyển chính thức'
                               ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
-                              : r.status === 'Đã qua sơ loại Online'
+                              : r.status === 'Đã duyệt hồ sơ'
                                 ? 'bg-blue-100 text-blue-800 border-blue-300'
                                 : r.status === 'Vượt chỉ tiêu (Chờ bổ sung)'
                                   ? 'bg-rose-100 text-rose-800 border-rose-300'
                                   : 'bg-amber-100 text-amber-800 border-amber-300'
                           }`}
                         >
-                          <option value="Chờ sơ loại">Chờ sơ loại</option>
-                          <option value="Đã qua sơ loại Online">Đã qua sơ loại Online</option>
+                          <option value="Chờ xét duyệt">Chờ xét duyệt</option>
+                          <option value="Đã duyệt hồ sơ">Đã duyệt hồ sơ</option>
                           <option value="Trúng tuyển chính thức">Trúng tuyển chính thức</option>
                           <option value="Vượt chỉ tiêu (Chờ bổ sung)">Vượt chỉ tiêu</option>
                           <option value="Đã hủy">Đã hủy</option>

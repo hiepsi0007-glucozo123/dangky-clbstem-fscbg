@@ -109,7 +109,7 @@ export const LookupView: React.FC = () => {
                     <span className={`text-xs font-bold px-3 py-1 rounded-full self-start sm:self-center ${
                       r.status === 'Trúng tuyển chính thức' 
                         ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' 
-                        : r.status === 'Đã qua sơ loại Online'
+                        : r.status === 'Đã duyệt hồ sơ'
                           ? 'bg-blue-100 text-blue-800 border border-blue-200'
                           : 'bg-amber-100 text-amber-800 border border-amber-200'
                     }`}>
@@ -139,7 +139,7 @@ export const LookupView: React.FC = () => {
 
                   <div className="bg-blue-50/80 p-3 rounded-xl border border-blue-200 text-xs text-[#002D62] flex items-center justify-between">
                     <span className="font-semibold">
-                      💡 Hướng dẫn: Giữ Zalo {r.zaloPhone} để nhận thông báo đề thi thử thách Online tiếp theo.
+                      💡 Hướng dẫn: Giữ liên lạc Zalo {r.zaloPhone} để nhận thông báo tiếp theo từ Nhà trường.
                     </span>
                   </div>
                 </div>

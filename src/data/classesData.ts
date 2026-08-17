@@ -336,7 +336,7 @@ export const INITIAL_REGISTRATION_RECORDS: RegistrationRecord[] = [
     equipmentCommitment: true,
     competitionNational: true,
     competitionInternational: true,
-    status: 'Đã qua sơ loại Online',
+    status: 'Đã duyệt hồ sơ',
     notes: 'Học sinh từng học Scratch cơ bản ở trường'
   },
   {
@@ -378,7 +378,7 @@ export const INITIAL_REGISTRATION_RECORDS: RegistrationRecord[] = [
     equipmentCommitment: true,
     competitionNational: true,
     competitionInternational: true,
-    status: 'Chờ sơ loại',
+    status: 'Chờ xét duyệt',
     notes: 'Rất đam mê cơ khí VEX V5'
   },
   {
@@ -399,7 +399,7 @@ export const INITIAL_REGISTRATION_RECORDS: RegistrationRecord[] = [
     equipmentCommitment: true,
     competitionNational: true,
     competitionInternational: false,
-    status: 'Chờ sơ loại'
+    status: 'Chờ xét duyệt'
   },
   {
     id: 'reg-005',
@@ -419,6 +419,6 @@ export const INITIAL_REGISTRATION_RECORDS: RegistrationRecord[] = [
     equipmentCommitment: true,
     competitionNational: true,
     competitionInternational: true,
-    status: 'Đã qua sơ loại Online'
+    status: 'Đã duyệt hồ sơ'
   }
 ];
